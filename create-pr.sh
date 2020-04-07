@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 if [[ -z "$GITHUB_TOKEN" ]]; then
   echo "Undefined GITHUB_TOKEN environment variable."
   exit 1
