@@ -6,6 +6,8 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
   exit 1
 fi
 
+git clone --depth=1 https://github.com/matomo-org/matomo.git $GITHUB_WORKSPACE/matomo
+
 cd $GITHUB_WORKSPACE/$PluginName
 git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
 git config --global user.name "$GITHUB_ACTOR"
@@ -15,8 +17,8 @@ git branch translationupdates
 git checkout -f translationupdates
 
 cd $GITHUB_WORKSPACE/matomo
-git submodule update --init --force 2> /dev/null
-composer install --prefer-dist 2> /dev/null
+git submodule update --init --force
+composer install --prefer-dist
 
 ln -s $GITHUB_WORKSPACE/$PluginName $GITHUB_WORKSPACE/matomo/plugins/$PluginName
 cp $GITHUB_WORKSPACE/matomo/tests/travis/config.ini.travis.php $GITHUB_WORKSPACE/matomo/config/config.ini.php
