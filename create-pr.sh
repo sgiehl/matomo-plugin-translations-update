@@ -91,12 +91,12 @@ git push --set-upstream origin translationupdates
 # Create PR
 curl \
   --request POST \
-  --header 'Authorization: token $GITHUB_TOKEN' \
-  --header 'Accept: application/vnd.github.v3+json' \
-  --data '{
-    "title":"[automatic translation update] $title",
-    "body":"$message",
-    "head":"translationupdates",
-    "base":"master"
-    }' \
+  --header "Authorization: Bearer $GITHUB_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data "{
+    \"title\":\"[automatic translation update] $title\",
+    \"body\":\"$message\",
+    \"head\":\"translationupdates\",
+    \"base\":\"master\"
+    }" \
   --url https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls
