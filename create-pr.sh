@@ -53,6 +53,7 @@ cd $GITHUB_WORKSPACE/matomo
 # Sync translations
 cd $GITHUB_WORKSPACE/matomo
 ./console translations:update --username $TransifexUsername --password $TransifexPassword --force --plugin=$PluginName --no-interaction
+echo "Translation udpates fetched."
 
 # Check for changes
 cd $GITHUB_WORKSPACE/plugin
@@ -61,6 +62,7 @@ git add "*.json"
 IFS=$'\n'
 changes=( $(git diff --numstat HEAD | grep -E '([0-9]+)\s+([0-9]+)\s+[a-zA-Z\/]*lang\/([a-z]{2,3}(-[a-z]{2,3})?)\.json' ) )
 unset IFS
+echo "Check for new changes."
 
 # abort here if no change available
 if [[ ${#changes[@]} -eq 0 ]]
@@ -69,6 +71,7 @@ then
   exit 0
 fi
 
+echo "Changes found."
 declare -i totaladditions=0
 declare -A additionsByLang
 for (( i=0; i < ${#changes[@]}; i++ )); do
