@@ -57,13 +57,10 @@ echo "Translation udpates fetched."
 
 # Check for changes
 cd $GITHUB_WORKSPACE/plugin
-echo "1"
 git add lang/
-echo "2"
 git add "*.json"
-echo "3"
 IFS=$'\n'
-changes=( $(git diff --numstat HEAD | grep -E '([0-9]+)\s+([0-9]+)\s+[a-zA-Z\/]*lang\/([a-z]{2,3}(-[a-z]{2,3})?)\.json' ) )
+changes=( $(git diff --numstat HEAD | grep -E '([0-9]+)\s+([0-9]+)\s+[a-zA-Z\/]*lang\/([a-z]{2,3}(-[a-z]{2,3})?)\.json' ) ) || true
 unset IFS
 echo "Check for new changes."
 
