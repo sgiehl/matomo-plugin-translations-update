@@ -65,7 +65,7 @@ unset IFS
 echo "Check for new changes."
 
 # abort here if no change available
-if [[ ${#changes[@]} -eq 0 ]]
+if [ [ -z "$changes" ] || [ ${#changes[@]} -eq 0 ] ]
 then
   echo "No changes in translation files available"
   exit 0
